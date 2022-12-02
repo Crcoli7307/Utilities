@@ -4,7 +4,7 @@ local Players = game:GetService("Players")
 
 --// Variables
 local LocalPlayer = Players.LocalPlayer
-local Mouse = Players:GetMouse()
+local Mouse = LocalPlayer:GetMouse()
 
 --// Api
 local Utilities = {
