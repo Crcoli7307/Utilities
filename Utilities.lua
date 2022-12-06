@@ -95,7 +95,7 @@ function Utilities.Ui.MakeDraggable(Object, DragFrame, Smoothness)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
             Dragging = true
             StartPos = Vector2.new(
-                Mouse.X - Object.AbsolutePosition.X,
+                Mouse.X - Object.AbsolutePosition.X ,
                 Mouse.Y - Object.AbsolutePosition.Y
             )
         end
@@ -110,7 +110,12 @@ function Utilities.Ui.MakeDraggable(Object, DragFrame, Smoothness)
     Mouse.Move:Connect(function()
         if Dragging then
             TweenService:Create(Object, TweenInfo.new(math.clamp(Smoothness, 0, 1), Enum.EasingStyle.Sine), {
-                Position = UDim2.new(0, Mouse.X - StartPos.X, 0, Mouse.Y - StartPos.Y) 
+                Position = UDim2.new(
+                    0, 
+                    Mouse.X - StartPos.X + (Object.Size.X.Offset * Object.AnchorPoint.X),
+                    0, 
+                    Mouse.Y - StartPos.Y + (Object.Size.Y.Offset * Object.AnchorPoint.Y)
+                ) 
             }):Play()
         end
     end)
