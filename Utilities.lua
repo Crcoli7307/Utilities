@@ -63,6 +63,30 @@ function Utilities.Ui.CreateObject(Class, Properties, Radius)
     return _Object
 end
 
+function Utilities.Ui.Pop(Object, Shrink)
+    local ObjClone = Object:Clone()
+
+    ObjClone.AnchorPoint = Vector2.new(0.5, 0.5)
+    ObjClone.Size = ObjClone.Size - UDim2.new(0, Shrink, 0, Shrink)
+    ObjClone.Position = UDim2.new(0.5, 0, 0.5, 0)
+
+    ObjClone.Position = Object
+
+    Object.BackgroundTransparency = 1
+
+    TweenService:Create(ObjClone, TweenInfo.new(0.2), {
+        Size = Object.Size
+    }):Play()
+
+    task.spawn(function()
+        task.wait(0.2)
+        Object.BackgroundTransparency = 0
+        ObjClone:Destroy()
+    end)
+
+    return ObjClone
+end
+
 function Utilities.Ui.MakeDraggable(Object, DragFrame, Smoothness)
     local StartPos 
     local Dragging = false
@@ -101,6 +125,18 @@ function Utilities.SetDefault(Defaults, Options)
     end
 
     return Defaults
+end
+
+function Utilities.RandomString(Length)
+    Length = Length or math.random(10, 100)
+
+    local Array = {}
+
+    for Index = 1, Length do
+        Array[Index] = string.char(math.random(32, 126))
+    end
+
+    return table.concat(Array)
 end
 
 return Utilities
