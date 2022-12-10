@@ -70,7 +70,7 @@ function Utilities.Ui.Pop(Object, Shrink)
     ObjClone.Size = ObjClone.Size - UDim2.new(0, Shrink, 0, Shrink)
     ObjClone.Position = UDim2.new(0.5, 0, 0.5, 0)
 
-    ObjClone.Position = Object
+    ObjClone.Parent = Object
 
     Object.BackgroundTransparency = 1
 
