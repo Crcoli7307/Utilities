@@ -19,20 +19,18 @@ local Utilities = {
 
 -- Color
 function Utilities.Color.Add(Color, Color2)
-    local R, G, B = Color.R + Color2.R, Color.G + Color2.G, Color.B + Color2.B
     return Color3.fromRGB(
-        math.min(R * 255, 255),
-        math.min(G * 255, 255),
-        math.min(B * 255, 255)
+        math.min((Color.R + Color2.R) * 255, 255),
+        math.min((Color.G + Color2.G) * 255, 255),
+        math.min((Color.B + Color2.B) * 255, 255)
     )
 end
 
 function Utilities.Color.Sub(Color, Color2)
-    local R, G, B = Color.R - Color2.R, Color.G - Color2.G, Color.B - Color2.B
     return Color3.fromRGB(
-        math.min(R * 255, 255),
-        math.min(G * 255, 255),
-        math.min(B * 255, 255)
+        math.min((Color.R - Color2.R) * 255, 255),
+        math.min((Color.G - Color2.G) * 255, 255),
+        math.min((Color.B - Color2.B) * 255, 255)
     )
 end
 
@@ -115,33 +113,8 @@ function Utilities.Ui.MakeDraggable(Object, DragFrame, Smoothness)
                     Mouse.X - StartPos.X + (Object.Size.X.Offset * Object.AnchorPoint.X),
                     0, 
                     Mouse.Y - StartPos.Y + (Object.Size.Y.Offset * Object.AnchorPoint.Y)
-                ) 
+                )
             }):Play()
         end
     end)
 end
-
--- Others
-function Utilities.SetDefault(Defaults, Options)
-    Defaults, Options = Defaults or {}, Options or {}
-
-    for Option, Value in next, Options do
-        Defaults[Option] = Value
-    end
-
-    return Defaults
-end
-
-function Utilities.RandomString(Length)
-    Length = Length or math.random(10, 100)
-
-    local Array = {}
-
-    for Index = 1, Length do
-        Array[Index] = string.char(math.random(32, 126))
-    end
-
-    return table.concat(Array)
-end
-
-return Utilities

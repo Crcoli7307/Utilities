@@ -1,10 +1,3 @@
-repeat
-    task.wait()
-until game:IsLoaded()
-
---// Modules
-local Utilities = loadstring(game:HttpGet("https://raw.githubusercontent.com/XBlueSkyCC/Utilities/main/Utilities.lua"))()
-
 --// Services
 local Players = game:GetService("Players")
 
@@ -27,9 +20,10 @@ function HideNick(Object)
     local _Settings = Settings[game.GameId] or Settings["All"]
 
     local function _(Object, Property)
-        Object[Property] = Object[Property]:gsub(LocalPlayer.Name, _Settings["Name"])
-        Object[Property] = Object[Property]:gsub(LocalPlayer.DisplayName, _Settings["Name"])
-        Object[Property] = Object[Property]:gsub(LocalPlayer.UserId, _Settings["UserId"])
+        local newValue = Object[Property]:gsub(LocalPlayer.Name, _Settings["Name"])
+        newValue = newValue:gsub(LocalPlayer.DisplayName, _Settings["Name"])
+        newValue = newValue:gsub(LocalPlayer.UserId, _Settings["UserId"])
+        Object[Property] = newValue
     end
 
     if Object:IsA("TextLabel") or Object:IsA("TextButton") then
